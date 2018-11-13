@@ -1,7 +1,7 @@
-import {ReperioCoreHttpConnector} from "../index";
+import {ReperioCoreConnector} from "../connector";
 
 export class RoleService {
-    constructor(public connector: ReperioCoreHttpConnector) { }
+    constructor(public connector: ReperioCoreConnector) { }
     
     async getRoleById(roleId: string) {
         return await this.connector.axios.get(`/roles/${roleId}`, {baseURL: this.connector.config.baseURL});

@@ -1,7 +1,7 @@
-import {ReperioCoreHttpConnector} from "../index";
+import {ReperioCoreConnector} from "../connector";
 
 export class ApplicationService {
-    constructor(public connector: ReperioCoreHttpConnector) { }
+    constructor(public connector: ReperioCoreConnector) { }
 
     async getApplicationById(applicationId: string) {
         return await this.connector.axios.get(`/applications/${applicationId}`, {baseURL: this.connector.config.baseURL});

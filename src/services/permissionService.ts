@@ -1,8 +1,8 @@
-import {ReperioCoreHttpConnector} from "../index";
+import {ReperioCoreConnector} from "../connector";
 import {RolePermission} from "../models/rolePermission";
 
 export class PermissionService {
-    constructor(public connector: ReperioCoreHttpConnector) { }
+    constructor(public connector: ReperioCoreConnector) { }
     
     async getPermissionById(permissionName: string) {
         return await this.connector.axios.get(`/permissions/${permissionName}`, {baseURL: this.connector.config.baseURL});

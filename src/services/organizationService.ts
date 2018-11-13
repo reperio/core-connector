@@ -1,7 +1,7 @@
-import {ReperioCoreHttpConnector} from "../index";
+import {ReperioCoreConnector} from "../connector";
 
 export class OrganizationService {
-    constructor(public connector: ReperioCoreHttpConnector) { }
+    constructor(public connector: ReperioCoreConnector) { }
     
     async getOrganizationById(organizationId: string) {
         return await this.connector.axios.get(`/organizations/${organizationId}`, {baseURL: this.connector.config.baseURL});

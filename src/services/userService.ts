@@ -1,8 +1,8 @@
-import {ReperioCoreHttpConnector} from "../index";
+import {ReperioCoreConnector} from "../connector";
 import {UserEmail} from "../models/userEmail";
 
 export class UserService {
-    constructor(public connector: ReperioCoreHttpConnector) { }
+    constructor(public connector: ReperioCoreConnector) { }
 
     async getUserById(userId: string) {
         return await this.connector.axios.get(`/users/${userId}`, {baseURL: this.connector.config.baseURL});

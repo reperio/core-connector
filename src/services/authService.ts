@@ -1,7 +1,7 @@
-import {ReperioCoreHttpConnector} from "../index";
+import {ReperioCoreConnector} from "../connector";
 
 export class AuthService {
-    constructor(public connector: ReperioCoreHttpConnector) { }
+    constructor(public connector: ReperioCoreConnector) { }
     
     async login(primaryEmailAddress: string, password: string) {
         return await this.connector.axios.post(`/auth/login`, {primaryEmailAddress, password}, {baseURL: this.connector.config.baseURL});
