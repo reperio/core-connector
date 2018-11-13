@@ -29,7 +29,7 @@ export class ReperioCoreConnector {
     _roleService: RoleService;
     _userService: UserService;
 
-    constructor(config: Partial<ReperioCoreConnectorConfig>) {
+    constructor(config?: Partial<ReperioCoreConnectorConfig>) {
         this.config = {...reperioCoreConnectorDefaultConfig, ...config};
         this.axios = axiosStatic.create();
         this.setAxiosInterceptors();
