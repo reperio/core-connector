@@ -22,24 +22,24 @@ export class ReperioCoreConnector {
     axios: AxiosInstance;
     config: ReperioCoreConnectorConfig;
 
-    _applicationService: ApplicationService;
-    _authService: AuthService;
-    _organizationService: OrganizationService;
-    _permissionService: PermissionService;
-    _roleService: RoleService;
-    _userService: UserService;
+    readonly applicationService: ApplicationService;
+    readonly authService: AuthService;
+    readonly organizationService: OrganizationService;
+    readonly permissionService: PermissionService;
+    readonly roleService: RoleService;
+    readonly userService: UserService;
 
     constructor(config?: Partial<ReperioCoreConnectorConfig>) {
         this.config = {...reperioCoreConnectorDefaultConfig, ...config};
         this.axios = axiosStatic.create();
         this.setAxiosInterceptors();
 
-        this._applicationService = new ApplicationService(this);
-        this._authService = new AuthService(this);
-        this._organizationService = new OrganizationService(this);
-        this._permissionService = new PermissionService(this);
-        this._roleService = new RoleService(this);
-        this._userService = new UserService(this);
+        this.applicationService = new ApplicationService(this);
+        this.authService = new AuthService(this);
+        this.organizationService = new OrganizationService(this);
+        this.permissionService = new PermissionService(this);
+        this.roleService = new RoleService(this);
+        this.userService = new UserService(this);
     }
 
     setAxiosInterceptors() {
@@ -58,29 +58,5 @@ export class ReperioCoreConnector {
             }
             return response;
         });
-    }
-
-    get applicationService() {
-        return this._applicationService;
-    }
-
-    get authService() {
-        return this._authService;
-    }
-
-    get organizationService() {
-        return this._organizationService;
-    }
-
-    get permissionService() {
-        return this._permissionService;
-    }
-
-    get roleService() {
-        return this._roleService;
-    }
-
-    get userService() {
-        return this._userService;
     }
 }
