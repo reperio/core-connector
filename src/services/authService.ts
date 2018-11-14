@@ -7,6 +7,10 @@ export class AuthService {
         return await this.connector.axios.post(`/auth/login`, {primaryEmailAddress, password}, {baseURL: this.connector.config.baseURL});
     }
 
+    async generateOTP() {
+        return (await this.connector.axios.post<{otp: string}>(`/auth/otp/generate`, null, {baseURL: this.connector.config.baseURL})).data;
+    }
+
     parseJwt(token: string): any {
         const base64Url = token.split('.')[1];
         const base64 = base64Url.replace('-', '+').replace('_', '/');
