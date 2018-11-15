@@ -95,4 +95,8 @@ export class UserService {
         }
         return await this.connector.axios.put(`/users/${userId}/roles`, payload, {baseURL: this.connector.config.baseURL});
     }
+
+    async deleteUser(userId: string) {
+        return await this.connector.axios.delete(`/users/${userId}`);
+    }
 }
