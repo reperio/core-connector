@@ -7,6 +7,7 @@ export interface User {
     firstName: string;
     lastName: string;
     password: string;
+    permissions: string[],
     userOrganizations: UserOrganization[];
     userRoles: UserRole[];
     userEmails: UserEmail[];
