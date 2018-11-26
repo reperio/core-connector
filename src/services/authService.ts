@@ -2,6 +2,10 @@ import {ReperioCoreConnector} from "../connector";
 
 export class AuthService {
     constructor(public connector: ReperioCoreConnector) { }
+
+    async validateCurrentJWT() {
+        return await this.connector.axios.get(`/auth`, {baseURL: this.connector.config.baseURL});
+    }
     
     async login(primaryEmailAddress: string, password: string) {
         return await this.connector.axios.post(`/auth/login`, {primaryEmailAddress, password}, {baseURL: this.connector.config.baseURL});
@@ -9,6 +13,10 @@ export class AuthService {
 
     async generateOTP() {
         return (await this.connector.axios.post<{otp: string}>(`/auth/otp/generate`, null, {baseURL: this.connector.config.baseURL})).data;
+    }
+
+    async authenticateWithOTP(otp: string) {
+        return await this.connector.axios.post<{otp: string}>(`/auth/otp`, {otp}, {baseURL: this.connector.config.baseURL});
     }
 
     parseJwt(token: string): any {
