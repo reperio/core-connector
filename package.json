@@ -1,6 +1,6 @@
 {
   "name": "@reperio/core-connector",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A collection of services that can be used to interact with the reperio core api.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "clean": "rm -rf ./dist",
-    "deploy": "yarn run clean && yarn run build && npm publish --access public"
+    "deploy": "yarn run clean && yarn run build && yarn publish --access public"
   },
   "repository": "git+https://github.com/reperio/reperio-core-connector.git",
   "author": "Sean Price <seanprice@sevenhillstechnology.com>",
