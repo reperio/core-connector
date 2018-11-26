@@ -1,4 +1,4 @@
-import {ReperioCoreConnector} from "../connector";
+import {ReperioCoreConnector} from "./connector";
 import {UserEmail} from "../models/userEmail";
 
 export class UserService {

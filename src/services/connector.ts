@@ -1,10 +1,10 @@
 import axiosStatic, {AxiosInstance} from "axios";
-import {ApplicationService} from "./services/applicationService";
-import {AuthService} from "./services/authService";
-import {OrganizationService} from "./services/organizationService";
-import {PermissionService} from "./services/permissionService";
-import {RoleService} from "./services/roleService";
-import {UserService} from "./services/userService";
+import {ApplicationService} from "./applicationService";
+import {AuthService} from "./authService";
+import {OrganizationService} from "./organizationService";
+import {PermissionService} from "./permissionService";
+import {RoleService} from "./roleService";
+import {UserService} from "./userService";
 
 export interface ReperioCoreConnectorConfig {
     baseURL: string;

@@ -1,4 +1,4 @@
-import {ReperioCoreConnector} from "../connector";
+import {ReperioCoreConnector} from "./connector";
 
 export class RoleService {
     constructor(public connector: ReperioCoreConnector) { }

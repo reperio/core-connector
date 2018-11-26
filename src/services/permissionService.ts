@@ -1,4 +1,4 @@
-import {ReperioCoreConnector} from "../connector";
+import {ReperioCoreConnector} from "./connector";
 import {RolePermission} from "../models/rolePermission";
 
 export class PermissionService {

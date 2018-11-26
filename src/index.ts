@@ -1,4 +1,4 @@
-export { ReperioCoreConnectorConfig, ReperioCoreConnector } from "./connector";
+export { ReperioCoreConnectorConfig, ReperioCoreConnector } from "./services/connector";
 export { Application } from "./models/application";
 export { Organization } from "./models/organization";
 export { Permission } from "./models/permission";

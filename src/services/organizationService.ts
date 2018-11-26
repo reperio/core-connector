@@ -1,4 +1,4 @@
-import {ReperioCoreConnector} from "../connector";
+import {ReperioCoreConnector} from "./connector";
 
 export class OrganizationService {
     constructor(public connector: ReperioCoreConnector) { }
