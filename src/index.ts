@@ -8,3 +8,4 @@ export { User } from "./models/user";
 export { UserEmail } from "./models/userEmail";
 export { UserOrganization } from "./models/userOrganization";
 export { UserRole } from "./models/userRole";
+export { AuthConnector } from "./components/authConnector";
