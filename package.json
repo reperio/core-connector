@@ -22,5 +22,8 @@
   },
   "devDependencies": {
     "@types/query-string": "^6.1.1"
-  }
+  },
+  "files": [
+    "dist/**/*"
+  ]
 }
