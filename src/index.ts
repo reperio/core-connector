@@ -1,7 +1,7 @@
 export { ReperioCoreConnectorConfig, ReperioCoreConnector } from "./services/connector";
 export { Application } from "./models/application";
 export { Organization } from "./models/organization";
-export { Permission } from "./models/permission";
+export { Permission, CorePermissions } from "./models/permission";
 export { Role } from "./models/role";
 export { RolePermission } from "./models/rolePermission";
 export { User } from "./models/user";
