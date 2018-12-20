@@ -4,7 +4,6 @@ import {Redirect} from "./redirect";
 interface Props {
     url: string;
     loginUrl: string;
-    isAuthInitialized: boolean;
     authToken: string;
     setAuthToken(token: string): Promise<any>;
 }
@@ -37,13 +36,13 @@ export class AuthConnector extends React.Component<Props, State> {
             return;
         }
 
+        await this.props.setAuthToken(value);
+
         this.setState({
             ...this.state,
             isInitialized: true,
             iframeAuthToken: value,
         });
-
-        await this.props.setAuthToken(value);
     };
 
     componentDidMount() {
@@ -90,8 +89,8 @@ export class AuthConnector extends React.Component<Props, State> {
     render() {
         return (
             <>
-                {this.props.isAuthInitialized && this.props.authToken != null ? this.props.children : null}
-                {this.props.isAuthInitialized && this.props.authToken == null ? <Redirect url={this.props.loginUrl} /> : null}
+                {this.state.isInitialized && this.props.authToken != null ? this.props.children : null}
+                {this.state.isInitialized && this.props.authToken == null ? <Redirect url={this.props.loginUrl} /> : null}
 
                 <iframe src={this.props.url}
                         ref={element => this.element = element}
