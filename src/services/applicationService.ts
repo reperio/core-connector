@@ -1,4 +1,5 @@
 import {ReperioCoreConnector} from "./connector";
+import {SurveyPayload} from "../models/surveyPayload";
 
 export class ApplicationService {
     constructor(public connector: ReperioCoreConnector) { }
@@ -9,5 +10,9 @@ export class ApplicationService {
 
     async getApplications() {
         return await this.connector.axios.get(`/applications`, {baseURL: this.connector.config.baseURL});
+    }
+
+    async surveyUserSignup(applicationId: string, surveyPayload: SurveyPayload) {
+        return await this.connector.axios.post(`/applications/${applicationId}/userSignup`, surveyPayload, {baseURL: this.connector.config.baseURL});
     }
 }
