@@ -12,6 +12,10 @@ export class UserService {
         return await this.connector.axios.get(`/users`, {baseURL: this.connector.config.baseURL});
     }
 
+    async getUserByEmail(primaryEmailAddress: string) {
+        return await this.connector.axios.get(`/users/${primaryEmailAddress}/emailExists`, {baseURL: this.connector.config.baseURL});
+    }
+
     async createUser(primaryEmailAddress: string, firstName: string, lastName: string, password: string, confirmPassword: string, organizationIds: string[]) {
         const payload = {
             primaryEmailAddress, 
