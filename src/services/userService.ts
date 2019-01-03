@@ -1,5 +1,6 @@
 import {ReperioCoreConnector} from "./connector";
 import {UserEmail} from "../models/userEmail";
+import {AxiosResponse} from "axios";
 
 export class UserService {
     constructor(public connector: ReperioCoreConnector) { }
@@ -12,8 +13,9 @@ export class UserService {
         return await this.connector.axios.get(`/users`, {baseURL: this.connector.config.baseURL});
     }
 
-    async getUserByEmail(primaryEmailAddress: string) {
-        return await this.connector.axios.get(`/users/${primaryEmailAddress}/emailExists`, {baseURL: this.connector.config.baseURL});
+    async checkUserExistsByEmail(primaryEmailAddress: string) : Promise<boolean> {
+        const response = await this.connector.axios.get(`/users/exists?emailAddress=${primaryEmailAddress}`, {baseURL: this.connector.config.baseURL})
+        return response.data;
     }
 
     async createUser(primaryEmailAddress: string, firstName: string, lastName: string, password: string, confirmPassword: string, organizationIds: string[]) {
