@@ -1,11 +1,14 @@
 export { ReperioCoreConnectorConfig, ReperioCoreConnector } from "./services/connector";
 export { Application } from "./models/application";
 export { Organization } from "./models/organization";
+export { OrganizationAddress } from "./models/organizationAddress";
 export { Permission, CorePermissions } from "./models/permission";
 export { Role } from "./models/role";
 export { RolePermission } from "./models/rolePermission";
+export { SurveyPayload } from "./models/surveyPayload";
 export { User } from "./models/user";
 export { UserEmail } from "./models/userEmail";
 export { UserOrganization } from "./models/userOrganization";
+export { UserPhone } from "./models/userPhone";
 export { UserRole } from "./models/userRole";
 export { AuthConnector } from "./components/authConnector";
