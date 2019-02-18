@@ -18,6 +18,11 @@ export class UserService {
         return response.data;
     }
 
+    async checkUserExistsByPhone(phoneNumber: string) : Promise<boolean> {
+        const response = await this.connector.axios.get(`/users/exists?phone=${phoneNumber}`, {baseURL: this.connector.config.baseURL})
+        return response.data;
+    }
+
     async createUser(primaryEmailAddress: string, firstName: string, lastName: string, password: string, confirmPassword: string, organizationIds: string[]) {
         const payload = {
             primaryEmailAddress, 

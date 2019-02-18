@@ -20,6 +20,16 @@ export class OrganizationService {
         return await this.connector.axios.post(`/organizations`, payload, {baseURL: this.connector.config.baseURL});
     }
 
+    async checkOrganizationExistsByName(organizationName: string) : Promise<boolean> {
+        const response = await this.connector.axios.get(`/organizations/exists?name=${organizationName}`, {baseURL: this.connector.config.baseURL})
+        return response.data;
+    }
+
+    async checkOrganizationExistsByAddress(address1: string, address2: string) : Promise<boolean> {
+        const response = await this.connector.axios.get(`/organizations/exists?address1=${address1}&address2=${address2}`, {baseURL: this.connector.config.baseURL})
+        return response.data;
+    }
+
     async editOrganization(organizationId: string, name: string, userIds: string[]) {
         const payload = {
             name, 
