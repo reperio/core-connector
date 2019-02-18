@@ -20,6 +20,23 @@ export class OrganizationService {
         return await this.connector.axios.post(`/organizations`, payload, {baseURL: this.connector.config.baseURL});
     }
 
+    async createOrganizationWithAddress(userId: string, organization: any) {
+        const payload = {
+            name: organization.name,
+            personal: false,
+            userIds: [userId],
+            address: {
+                streetAddress: organization.streetAddress,
+                suiteNumber: organization.suiteNumber.toString(),
+                city: organization.city,
+                state: organization.state,
+                zip: organization.zip.toString()
+            }
+        };
+
+        return await this.connector.axios.post(`/organizations`, payload, {baseURL: this.connector.config.baseURL});
+    }
+
     async editOrganization(organizationId: string, name: string, userIds: string[]) {
         const payload = {
             name, 
