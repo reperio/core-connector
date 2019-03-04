@@ -1,4 +1,5 @@
 import {ReperioCoreConnector} from "./connector";
+import { CreateOrganization } from "../models/createOrganization";
 
 export class OrganizationService {
     constructor(public connector: ReperioCoreConnector) { }
@@ -17,6 +18,23 @@ export class OrganizationService {
             personal: false, 
             userIds
         }
+        return await this.connector.axios.post(`/organizations`, payload, {baseURL: this.connector.config.baseURL});
+    }
+
+    async createOrganizationWithAddress(userId: string, organization: CreateOrganization) {
+        const payload = {
+            name: organization.name,
+            personal: false,
+            userIds: [userId],
+            address: {
+                streetAddress: organization.streetAddress,
+                suiteNumber: organization.suiteNumber.toString(),
+                city: organization.city,
+                state: organization.state,
+                zip: organization.zip.toString()
+            }
+        };
+
         return await this.connector.axios.post(`/organizations`, payload, {baseURL: this.connector.config.baseURL});
     }
 
