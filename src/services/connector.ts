@@ -10,12 +10,14 @@ export interface ReperioCoreConnectorConfig {
     baseURL: string;
     getAuthToken?: () => string | Promise<string>;
     onAuthTokenReceived?: (authToken: string) => void | Promise<any>;
+    applicationToken?: string;
 }
 
 const reperioCoreConnectorDefaultConfig: ReperioCoreConnectorConfig = {
     baseURL: "",
     getAuthToken: void(0),
-    onAuthTokenReceived: void(0)
+    onAuthTokenReceived: void(0),
+    applicationToken: ""
 };
 
 export class ReperioCoreConnector {
@@ -47,6 +49,9 @@ export class ReperioCoreConnector {
             const authToken = typeof this.config.getAuthToken === "function" ? await this.config.getAuthToken() : null;
             if (authToken != null) {
                 config.headers.authorization = `Bearer ${authToken}`;
+            }
+            if (this.config.applicationToken != null && this.config.applicationToken !== '') {
+                config.headers['Application-Token'] = this.config.applicationToken
             }
             return config;
         });
