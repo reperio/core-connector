@@ -29,7 +29,7 @@ export class OrganizationService {
         const payload = {
             name: organization.name,
             personal: false,
-            userIds: [userId],
+            userId: userId,
             address: {
                 streetAddress: organization.streetAddress,
                 suiteNumber: organization.suiteNumber.toString(),
