@@ -16,11 +16,11 @@ export class OrganizationService {
         return await this.connector.axios.get(`/organizations/user/${userId}`, {baseURL: this.connector.config.baseURL});
     }
 
-    async createOrganization(name: string, userIds: string[]) {
+    async createOrganization(name: string, userId: string) {
         const payload = {
             name, 
             personal: false, 
-            userIds
+            userId
         }
         return await this.connector.axios.post(`/organizations`, payload, {baseURL: this.connector.config.baseURL});
     }
