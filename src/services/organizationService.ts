@@ -53,4 +53,8 @@ export class OrganizationService {
     async deleteOrganization(organizationId: string) {
         return await this.connector.axios.delete(`/organizations/${organizationId}`, {baseURL: this.connector.config.baseURL});
     }
+
+    async postOrganizationApplication(organizationId: string, applicationId: string, userId: string) {
+        return await this.connector.axios.post(`/organizations/${organizationId}/applications`, {applicationId, userId}, {baseURL: this.connector.config.baseURL});
+    }
 }
