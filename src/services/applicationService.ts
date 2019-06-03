@@ -22,4 +22,8 @@ export class ApplicationService {
         const response = await this.connector.axios.post(`/applications/${applicationId}/userSignup`, surveyPayload, {baseURL: this.connector.config.baseURL});
         return response.data;
     }
+
+    async applicationOragnizationSearch(applicationId: string, organizationIds: string[]) : Promise<any> {
+        return await this.connector.axios.post(`/applications/${applicationId}/organizationSearch`, {organizationIds}, {baseURL: this.connector.config.baseURL});
+    }
 }
