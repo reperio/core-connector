@@ -105,4 +105,12 @@ export class UserService {
     async deleteUser(userId: string) {
         return await this.connector.axios.delete(`/users/${userId}`);
     }
+
+    async getUserOrganizations(userId: string) {
+        return await this.connector.axios.get(`/users/${userId}/organizations`, {baseURL: this.connector.config.baseURL});
+    }
+
+    async getUserOrganizationByOrganizationId(userId: string, organizationId: string) {
+        return await this.connector.axios.get(`/users/${userId}/organizations/${organizationId}`, {baseURL: this.connector.config.baseURL});
+    }
 }
