@@ -59,6 +59,6 @@ export class OrganizationService {
     }
     
     async enableOrganizationApplication(organizationId: string, applicationId: string, userId: string) {
-        return await this.connector.axios.post(`/organizations/${organizationId}/applications/${applicationId}`, {userId}, {baseURL: this.connector.config.baseURL});
+        return await this.connector.axios.post(`/organizations/${organizationId}/applications/${applicationId}/enable`, {userId}, {baseURL: this.connector.config.baseURL});
     }
 }
