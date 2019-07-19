@@ -49,4 +49,8 @@ export class OrganizationService {
     async deleteOrganization(organizationId: string) {
         return await this.connector.axios.delete(`/organizations/${organizationId}`, {baseURL: this.connector.config.baseURL});
     }
+
+    async sendNewCustomerEmail(organizationId: string) {
+        return await this.connector.axios.post(`/organizations/${organizationId}/newCustomerEmail`, {baseURL: this.connector.config.baseURL});
+    }
 }
