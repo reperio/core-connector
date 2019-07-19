@@ -63,6 +63,6 @@ export class OrganizationService {
     }
 
     async sendNewCustomerEmail(organizationId: string) {
-        return await this.connector.axios.post(`/organizations/${organizationId}/newCustomerEmail`, {baseURL: this.connector.config.baseURL});
+        return await this.connector.axios.post(`/organizations/${organizationId}/newCustomerEmail`, {}, {baseURL: this.connector.config.baseURL});
     }
 }
