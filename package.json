@@ -1,6 +1,10 @@
 {
   "name": "@reperio/core-connector",
+<<<<<<< HEAD
   "version": "4.0.0",
+=======
+  "version": "3.4.0",
+>>>>>>> us-3534 - new customer email notification
   "description": "A collection of services that can be used to interact with the reperio core api.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
