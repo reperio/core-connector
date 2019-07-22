@@ -26,4 +26,8 @@ export class ApplicationService {
     async applicationOragnizationSearch(applicationId: string, organizationIds: string[]) : Promise<any> {
         return await this.connector.axios.post(`/applications/${applicationId}/organizationSearch`, {organizationIds}, {baseURL: this.connector.config.baseURL});
     }
+
+    async sendNotificationEmail(applicationId: string, addressee: string, body: string) {
+        return await this.connector.axios.post(`/applications/${applicationId}/emailNotification`, {addressee, body}, {baseURL: this.connector.config.baseURL});
+    }
 }
