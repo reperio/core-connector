@@ -7,4 +7,5 @@ export interface Organization {
     userOrganizations: UserOrganization[];
     organizationAddress: OrganizationAddress[];
     personal: boolean;
+    supportNumber: string;
 }
