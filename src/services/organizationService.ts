@@ -5,15 +5,15 @@ export class OrganizationService {
     constructor(public connector: ReperioCoreConnector) { }
     
     async getOrganizationById(organizationId: string) {
-        return await this.connector.axios.get(`/organizations/${organizationId}`, {baseURL: this.connector.config.baseURL});
+        return await this.connector.axios.get(`/organizations/${organizationId}`);
     }
 
     async getOrganizations() {
-        return await this.connector.axios.get(`/organizations`, {baseURL: this.connector.config.baseURL});
+        return await this.connector.axios.get(`/organizations`);
     }
 
     async getOrganizationsByUser(userId: string) {
-        return await this.connector.axios.get(`/organizations/user/${userId}`, {baseURL: this.connector.config.baseURL});
+        return await this.connector.axios.get(`/organizations/user/${userId}`);
     }
 
     async createOrganization(name: string, userId: string) {
@@ -22,7 +22,7 @@ export class OrganizationService {
             personal: false, 
             userId
         }
-        return await this.connector.axios.post(`/organizations`, payload, {baseURL: this.connector.config.baseURL});
+        return await this.connector.axios.post(`/organizations`, payload);
     }
 
     async createOrganizationWithAddress(userId: string, organization: CreateOrganization) {
@@ -39,7 +39,7 @@ export class OrganizationService {
             }
         };
 
-        return await this.connector.axios.post(`/organizations`, payload, {baseURL: this.connector.config.baseURL});
+        return await this.connector.axios.post(`/organizations`, payload);
     }
 
     async editOrganization(organizationId: string, name: string, userIds: string[]) {
@@ -47,18 +47,18 @@ export class OrganizationService {
             name, 
             userIds
         }
-        return await this.connector.axios.put(`/organizations/${organizationId}`, payload, {baseURL: this.connector.config.baseURL});
+        return await this.connector.axios.put(`/organizations/${organizationId}`, payload);
     }
 
     async deleteOrganization(organizationId: string) {
-        return await this.connector.axios.delete(`/organizations/${organizationId}`, {baseURL: this.connector.config.baseURL});
+        return await this.connector.axios.delete(`/organizations/${organizationId}`);
     }
 
     async postOrganizationApplication(organizationId: string, applicationId: string, userId: string) {
-        return await this.connector.axios.post(`/organizations/${organizationId}/applications`, {applicationId, userId}, {baseURL: this.connector.config.baseURL});
+        return await this.connector.axios.post(`/organizations/${organizationId}/applications`, {applicationId, userId});
     }
     
     async enableOrganizationApplication(organizationId: string, applicationId: string, userId: string) {
-        return await this.connector.axios.post(`/organizations/${organizationId}/applications/${applicationId}/enable`, {userId}, {baseURL: this.connector.config.baseURL});
+        return await this.connector.axios.post(`/organizations/${organizationId}/applications/${applicationId}/enable`, {userId});
     }
 }

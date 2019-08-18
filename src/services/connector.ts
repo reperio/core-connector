@@ -33,7 +33,10 @@ export class ReperioCoreConnector {
 
     constructor(config?: Partial<ReperioCoreConnectorConfig>) {
         this.config = {...reperioCoreConnectorDefaultConfig, ...config};
-        this.axios = axiosStatic.create();
+        this.axios = axiosStatic.create({
+            baseURL: this.config.baseURL,
+            withCredentials: true
+        });
         this.setAxiosInterceptors();
 
         this.applicationService = new ApplicationService(this);
