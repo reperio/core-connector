@@ -5,11 +5,11 @@ export class PermissionService {
     constructor(public connector: ReperioCoreConnector) { }
     
     async getPermissionById(permissionName: string) {
-        return await this.connector.axios.get(`/permissions/${permissionName}`, {baseURL: this.connector.config.baseURL});
+        return await this.connector.axios.get(`/permissions/${permissionName}`);
     }
 
     async getPermissions() {
-        return await this.connector.axios.get(`/permissions`, {baseURL: this.connector.config.baseURL});
+        return await this.connector.axios.get(`/permissions`);
     }
 
     async editPermission(permissionName: string, displayName: string, description: string, isSystemAdminPermission: boolean, rolePermissions: RolePermission[]) {
@@ -24,6 +24,6 @@ export class PermissionService {
                 }
             })
         }
-        return await this.connector.axios.put(`/permissions/${permissionName}`, payload, {baseURL: this.connector.config.baseURL});
+        return await this.connector.axios.put(`/permissions/${permissionName}`, payload);
     }
 }

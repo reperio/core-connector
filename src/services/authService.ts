@@ -3,27 +3,24 @@ import {ReperioCoreConnector} from "./connector";
 export class AuthService {
     constructor(public connector: ReperioCoreConnector) { }
 
-    async validateCurrentJWT() {
-        return await this.connector.axios.get(`/auth`, {baseURL: this.connector.config.baseURL});
+    async getLoggedInUser() {
+        return (await this.connector.axios.get(`/auth`)).data;
     }
     
     async login(primaryEmailAddress: string, password: string) {
-        return await this.connector.axios.post(`/auth/login`, {primaryEmailAddress, password}, {baseURL: this.connector.config.baseURL});
+        return await this.connector.axios.post(`/auth/login`, {primaryEmailAddress, password});
+    }
+    
+    async logout() {
+        return await this.connector.axios.post(`/auth/logout`, {});
     }
 
     async generateOTP() {
-        return (await this.connector.axios.post<{otp: string}>(`/auth/otp/generate`, null, {baseURL: this.connector.config.baseURL})).data;
+        return (await this.connector.axios.post<{otp: string}>(`/auth/otp/generate`, null)).data;
     }
 
     async authenticateWithOTP(otp: string) {
-        return await this.connector.axios.post<{otp: string}>(`/auth/otp`, {otp}, {baseURL: this.connector.config.baseURL});
-    }
-
-    parseJwt(token: string): any {
-        const base64Url = token.split('.')[1];
-        const base64 = base64Url.replace('-', '+').replace('_', '/');
-
-        return JSON.parse(window.atob(base64));
+        return await this.connector.axios.post<{otp: string}>(`/auth/otp`, {otp});
     }
 
     async signup(primaryEmailAddress: string, firstName: string, lastName: string, password: string, confirmPassword: string) {
@@ -34,25 +31,25 @@ export class AuthService {
             password, 
             confirmPassword
         }
-        return await this.connector.axios.post(`/auth/signup`, payload, {baseURL: this.connector.config.baseURL});
+        return await this.connector.axios.post(`/auth/signup`, payload);
     }
 
     async recaptcha(response: string) {
-        return await this.connector.axios.post(`/auth/recaptcha`, {response}, {baseURL: this.connector.config.baseURL});
+        return await this.connector.axios.post(`/auth/recaptcha`, {response});
     }
 
     async emailVerification(token: string) {
         const payload = {
             token
         }
-        return await this.connector.axios.post(`/auth/emailVerification`, payload, {baseURL: this.connector.config.baseURL});
+        return await this.connector.axios.post(`/auth/emailVerification`, payload);
     }
 
     async forgotPassword(primaryEmailAddress: string) {
         const payload = {
             primaryEmailAddress
         }
-        return await this.connector.axios.post(`/auth/forgotPassword`, payload, {baseURL: this.connector.config.baseURL});
+        return await this.connector.axios.post(`/auth/forgotPassword`, payload);
     }
 
     async resetPassword(token: string, password: string, confirmPassword: string) {
@@ -61,11 +58,11 @@ export class AuthService {
             password, 
             confirmPassword
         }
-        return await this.connector.axios.post(`/auth/resetPassword`, payload, {baseURL: this.connector.config.baseURL});
+        return await this.connector.axios.post(`/auth/resetPassword`, payload);
     }
 
     async verifyResetPassword(token: string) {
-        return await this.connector.axios.get(`/auth/resetPassword/${token}`, {baseURL: this.connector.config.baseURL});
+        return await this.connector.axios.get(`/auth/resetPassword/${token}`);
     }
 
     async sendVerificationEmail(userId: string, email: string) {
@@ -73,6 +70,6 @@ export class AuthService {
             userId, 
             email
         }
-        return await this.connector.axios.post(`/auth/sendVerificationEmail`, payload, {baseURL: this.connector.config.baseURL});
+        return await this.connector.axios.post(`/auth/sendVerificationEmail`, payload);
     }
 }

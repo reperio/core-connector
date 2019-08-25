@@ -1,104 +1,63 @@
 import React from 'react'
 import {Redirect} from "./redirect";
+import { ReperioCoreConnector } from '../services/connector';
+import { User } from '../models/user';
 
 interface Props {
     url: string;
     loginUrl?: string;
-    authToken: string;
-    setAuthToken(token: string): Promise<any>;
+    redirectToLogin?: boolean;
+    reperioCoreConnector: ReperioCoreConnector;
+    setLoggedInUser: (user: User) => any;
 }
 
 interface State {
     isInitialized: boolean;
-    iframeAuthToken: string | null;
+    redirectToLogin: boolean;
 }
 
 export class AuthConnector extends React.Component<Props, State> {
-    element: HTMLIFrameElement | null = null;
 
     constructor(props: Props) {
         super(props);
 
         this.state = {
             isInitialized: false,
-            iframeAuthToken: null
+            redirectToLogin: false
         };
     }
 
-    eventListener = async (e: WindowEventMap["message"]) => {
-        const {origin, data} = e;
-        const url = new URL(this.props.url);
-        if (origin !== url.origin) {
-            return;
+    async componentDidMount() {
+        
+        try {
+            const user = await this.props.reperioCoreConnector.authService.getLoggedInUser();
+            this.props.setLoggedInUser(user);
+            this.setState({
+                isInitialized: true,
+                redirectToLogin: false
+            });
+        } catch {
+            this.setState({
+                isInitialized: true,
+                redirectToLogin: true
+            });
         }
-        const {action, name, value} = data as {action: string, name: string, value: string};
-        if (action !== "postMessageEnhancer/UPDATED" || name !== "jwt") {
-            return;
-        }
-
-        await this.props.setAuthToken(value);
-
-        this.setState({
-            ...this.state,
-            isInitialized: true,
-            iframeAuthToken: value,
-        });
-    };
-
-    componentDidMount() {
-        if (this.element == null) {
-            throw new Error("element must be defined");
-        }
-
-        const element: HTMLIFrameElement = this.element;
-
-        window.addEventListener("message", this.eventListener);
-
-        element.addEventListener("load", () => {
-            if (element.contentWindow == null) {
-                throw new Error("element.contentWindow must be defined");
-            }
-            const url = new URL(this.props.url);
-            element.contentWindow.postMessage({action: "postMessageEnhancer/SUBSCRIBE", subscribeTo: "jwt"}, url.origin);
-        });
-    }
-
-    componentDidUpdate(prevProps: Props, prevState: State) {
-        if (!this.state.isInitialized) {
-            return;
-        }
-
-        if (this.element == null) {
-            throw new Error("element must be defined");
-        }
-
-        if (this.element.contentWindow == null) {
-            throw new Error("element.contentWindow must be defined");
-        }
-
-        if (this.props.authToken !== prevState.iframeAuthToken && this.props.authToken !== this.state.iframeAuthToken) {
-            const url = new URL(this.props.url);
-            this.element.contentWindow.postMessage({action: "postMessageEnhancer/UPDATE", subscribeTo: "jwt", value: this.props.authToken}, url.origin);
-        }
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener("message", this.eventListener);
     }
 
     render() {
-        return (
-            <>
-                {this.state.isInitialized ? (
-                    this.props.authToken == null && this.props.loginUrl != null
-                        ? <Redirect url={this.props.loginUrl} />
-                        : this.props.children
-                ) : null}
+        if (!this.state.isInitialized) {
+            return null;
+        }
 
-                <iframe src={this.props.url}
-                        ref={element => this.element = element}
-                        style={{display: "none"}}/>
-            </>
-        );
+        const redirectToLogin = this.state.redirectToLogin || this.props.redirectToLogin;
+        if (redirectToLogin) {
+            if (this.props.loginUrl == null) {
+                return null;
+            } else {
+                return <Redirect url={this.props.loginUrl} />
+            }
+        } else {
+            return this.props.children;
+        }
     }
 }
