@@ -16,7 +16,7 @@ export class OrganizationService {
         return await this.connector.axios.get(`/organizations/user/${userId}`);
     }
 
-    async createOrganization(name: string, userId: string) {
+    async createOrganization(name: string, userId: string[]) {
         const payload = {
             name, 
             personal: false, 

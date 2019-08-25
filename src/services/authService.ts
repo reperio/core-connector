@@ -3,12 +3,16 @@ import {ReperioCoreConnector} from "./connector";
 export class AuthService {
     constructor(public connector: ReperioCoreConnector) { }
 
-    async validateCurrentJWT() {
-        return await this.connector.axios.get(`/auth`);
+    async getLoggedInUser() {
+        return (await this.connector.axios.get(`/auth`)).data;
     }
     
     async login(primaryEmailAddress: string, password: string) {
         return await this.connector.axios.post(`/auth/login`, {primaryEmailAddress, password});
+    }
+    
+    async logout() {
+        return await this.connector.axios.post(`/auth/logout`, {});
     }
 
     async generateOTP() {
@@ -17,13 +21,6 @@ export class AuthService {
 
     async authenticateWithOTP(otp: string) {
         return await this.connector.axios.post<{otp: string}>(`/auth/otp`, {otp});
-    }
-
-    parseJwt(token: string): any {
-        const base64Url = token.split('.')[1];
-        const base64 = base64Url.replace('-', '+').replace('_', '/');
-
-        return JSON.parse(window.atob(base64));
     }
 
     async signup(primaryEmailAddress: string, firstName: string, lastName: string, password: string, confirmPassword: string) {
