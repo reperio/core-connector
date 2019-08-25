@@ -1,6 +1,6 @@
 {
   "name": "@reperio/core-connector",
-  "version": "3.14.0",
+  "version": "4.0.0",
   "description": "A collection of services that can be used to interact with the reperio core api.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
