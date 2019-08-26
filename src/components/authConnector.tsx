@@ -8,12 +8,11 @@ interface Props {
     loginUrl?: string;
     redirectToLogin?: boolean;
     reperioCoreConnector: ReperioCoreConnector;
-    setLoggedInUser: (user: User) => any;
+    setLoggedInUser: (user: User | null) => any;
 }
 
 interface State {
     isInitialized: boolean;
-    redirectToLogin: boolean;
 }
 
 export class AuthConnector extends React.Component<Props, State> {
@@ -22,8 +21,7 @@ export class AuthConnector extends React.Component<Props, State> {
         super(props);
 
         this.state = {
-            isInitialized: false,
-            redirectToLogin: false
+            isInitialized: false
         };
     }
 
@@ -33,13 +31,12 @@ export class AuthConnector extends React.Component<Props, State> {
             const user = await this.props.reperioCoreConnector.authService.getLoggedInUser();
             this.props.setLoggedInUser(user);
             this.setState({
-                isInitialized: true,
-                redirectToLogin: false
+                isInitialized: true
             });
         } catch {
+            this.props.setLoggedInUser(null);
             this.setState({
-                isInitialized: true,
-                redirectToLogin: true
+                isInitialized: true
             });
         }
     }
@@ -49,7 +46,7 @@ export class AuthConnector extends React.Component<Props, State> {
             return null;
         }
 
-        const redirectToLogin = this.state.redirectToLogin || this.props.redirectToLogin;
+        const redirectToLogin = this.props.redirectToLogin;
         if (redirectToLogin) {
             if (this.props.loginUrl == null) {
                 return null;
