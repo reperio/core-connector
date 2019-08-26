@@ -8,7 +8,7 @@ interface Props {
     loginUrl?: string;
     redirectToLogin?: boolean;
     reperioCoreConnector: ReperioCoreConnector;
-    setLoggedInUser: (user?: User) => any;
+    setLoggedInUser: (user: User | null) => any;
 }
 
 interface State {
@@ -34,7 +34,7 @@ export class AuthConnector extends React.Component<Props, State> {
                 isInitialized: true
             });
         } catch {
-            this.props.setLoggedInUser();
+            this.props.setLoggedInUser(null);
             this.setState({
                 isInitialized: true
             });
