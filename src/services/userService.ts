@@ -117,4 +117,8 @@ export class UserService {
     async getUserRoles(userId: string) {
         return await this.connector.axios.get(`/users/${userId}/roles`);
     }
+
+    async getUserPermissionsForOrganization(userId: string, organizationId: string) {
+        return await this.connector.axios.get(`/users/${userId}/organizations/${organizationId}/permissions`);
+    }
 }
