@@ -12,7 +12,7 @@ export class AuthService {
     }
     
     async logout() {
-        return await this.connector.axios.post(`/auth/logout`, {});
+        return await this.connector.axios.delete(`/auth`, {});
     }
 
     async generateOTP() {
