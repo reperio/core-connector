@@ -19,8 +19,7 @@ export class UserService {
     }
 
     async getUsersQuery(queryParameters: QueryParameters) {
-        const endcodedQueryParameters = this.utilitiesService.encodeQueryParameters(queryParameters);
-        return await this.connector.axios.get(`/users/query?${endcodedQueryParameters}`, {baseURL: this.connector.config.baseURL});
+        return await this.connector.axios.post(`/users/query`, queryParameters);
     }
 
     async checkUserExistsByEmail(primaryEmailAddress: string) : Promise<boolean> {

@@ -1,5 +1,6 @@
 import {ReperioCoreConnector} from "./connector";
 import {RolePermission} from "../models/rolePermission";
+import { QueryParameters } from "../models/queryParameters";
 
 export class PermissionService {
     constructor(public connector: ReperioCoreConnector) { }
@@ -10,6 +11,10 @@ export class PermissionService {
 
     async getPermissions() {
         return await this.connector.axios.get(`/permissions`);
+    }
+
+    async getPermissionsQuery(queryParameters: QueryParameters) {
+        return await this.connector.axios.post(`/permissions/query`, queryParameters);
     }
 
     async editPermission(permissionName: string, displayName: string, description: string, isSystemAdminPermission: boolean, rolePermissions: RolePermission[]) {

@@ -17,9 +17,9 @@ export class UtilitiesService {
         // }
         if (queryParameters.sort != null) {
             for (let i = 0; i < queryParameters.sort.length; ++i) {
-                queryStringParts.push(`sort[${i}][id]=${encodeURIComponent(queryParameters.sort[i].id)}`);
+                queryStringParts.push(`sort[${i}].id=${encodeURIComponent(queryParameters.sort[i].id)}`);
                 if (queryParameters.sort[i].desc != null) {
-                    queryStringParts.push(`sort[${i}][desc]=${encodeURIComponent(queryParameters.sort[i].desc.toString())}`);
+                    queryStringParts.push(`sort[${i}].desc=${encodeURIComponent(queryParameters.sort[i].desc.toString())}`);
                 }
             }
         }
