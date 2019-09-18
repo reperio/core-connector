@@ -1,5 +1,6 @@
 import {ReperioCoreConnector} from "./connector";
 import { CreateOrganization } from "../models/createOrganization";
+import { QueryParameters } from "../models/queryParameters";
 
 export class OrganizationService {
     constructor(public connector: ReperioCoreConnector) { }
@@ -10,6 +11,10 @@ export class OrganizationService {
 
     async getOrganizations() {
         return await this.connector.axios.get(`/organizations`);
+    }
+
+    async getOrganizationsQuery(queryParameters: QueryParameters) {
+        return await this.connector.axios.post(`/organizations/query`, queryParameters);
     }
 
     async getOrganizationsByUser(userId: string) {

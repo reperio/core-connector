@@ -12,3 +12,5 @@ export { UserOrganization } from "./models/userOrganization";
 export { UserPhone } from "./models/userPhone";
 export { UserRole } from "./models/userRole";
 export { AuthConnector } from "./components/authConnector";
+export { QueryParameters, Filter, Sort } from "./models/queryParameters";
+export { QueryResult } from "./models/queryResult";
