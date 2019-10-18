@@ -10,6 +10,10 @@ export class UserService {
         return await this.connector.axios.get(`/users/${userId}`);
     }
 
+    async getUsersByOrganizationId(organizationId: string) {
+        return await this.connector.axios.get(`/organizations/${organizationId}/users`);
+    }
+
     async getUsers() {
         return await this.connector.axios.get(`/users`);
     }
