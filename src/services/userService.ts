@@ -18,8 +18,8 @@ export class UserService {
         return await this.connector.axios.get(`/users`);
     }
 
-    async getUsersQuery(queryParameters: QueryParameters) {
-        return await this.connector.axios.post(`/users/query`, queryParameters);
+    async getUsersQuery(queryParameters: QueryParameters, organizationId?: string) {
+        return await this.connector.axios.post(`/users/query`, {...queryParameters, organizationId});
     }
 
     async checkUserExistsByEmail(primaryEmailAddress: string) : Promise<boolean> {
