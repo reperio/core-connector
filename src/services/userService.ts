@@ -22,6 +22,10 @@ export class UserService {
         return await this.connector.axios.post(`/users/query`, {...queryParameters, organizationId});
     }
 
+    async getUsersByIdQuery(queryParameters: QueryParameters, userIds: string[]) {
+        return await this.connector.axios.post(`/users/query`, {...queryParameters, userIds});
+    }
+
     async checkUserExistsByEmail(primaryEmailAddress: string) : Promise<boolean> {
         const response = await this.connector.axios.get(`/users/exists?emailAddress=${primaryEmailAddress}`)
         return response.data;
@@ -129,5 +133,9 @@ export class UserService {
 
     async getUserPermissionsForOrganization(userId: string, organizationId: string) {
         return await this.connector.axios.get(`/users/${userId}/organizations/${organizationId}/permissions`);
+    }
+
+    async inviteUserByEmail(applicationId: string, invitingId: string, primaryEmailAddress: string, organizationId: string, firstName?: string, lastName?: string) {
+        return await this.connector.axios.post(`/users/invite/email`, {applicationId, invitingId, primaryEmailAddress, organizationId, firstName, lastName});
     }
 }
