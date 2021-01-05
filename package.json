@@ -14,7 +14,7 @@
   "author": "Sean Price <seanprice@sevenhillstechnology.com>",
   "license": "MPL-2.0",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "query-string": "^6.2.0",
     "react": "^16.6.3"
   },
